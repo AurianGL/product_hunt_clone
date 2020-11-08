@@ -4,4 +4,15 @@ class ProductsController < ApplicationController
   def index
     @products = Product.all
   end
+
+  def new
+    @product = Product.new
+  end
+
+  def create
+    @product = Product.new(params.require(:product).permit(:name, :tagline))
+    if @product.save
+      redirect_to root_path
+    end
+  end
 end
